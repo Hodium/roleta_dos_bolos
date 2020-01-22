@@ -169,7 +169,7 @@
       <div class="centrado">
         <h3>DESCOBRE A TUA TAREFA DE DOMINGO!</h3>
         <h5>QUE A SORTE ESTEJA CONTIGO.</h5>
-        <img id="imageDaRoleta" src="./assets/roulette.png" />
+        <img id="imageDaRoleta" src="./assets/roulette.gif" />
       </div>
       <Button
         buttonId="v1"
@@ -178,29 +178,37 @@
         @carregueiNoBotao="carregueiNoBotao"
       ></Button>
     </div>
-    <div v-show="terceiraJanela">
-      <h1>Ah! Rólêta dus Bólòs</h1>
-      <h3>SORTUDO1:</h3>
-      <h5>PEDRO</h5>
-      <h3>SORTUDO2:</h3>
-      <h5>CARMEN</h5>
+    <div v-show="terceiraJanela" class="terceiraJanela">
+      <img src="./assets/logoTop.svg" class="primeiraJanelaTop" />
+      <img src="./assets/logo.svg" class="primeiraJanelaTopLogo" />
+      <Job type="shop" class="primeiroResultado" winner="TESTE NOME" />
+      <Job type="meals" winner="TESTE NOME" />
+      <Job type="settable" winner="TESTE NOME" />
+      <Job type="cleartable" winner="TESTE NOME" />
+      <Job type="dishes" winner="TESTE NOME" />
+      <Job type="mop" winner="TESTE NOME" />
+      <Job type="dry" winner="TESTE NOME" />
+      <Job type="trash" winner="TESTE NOME" />
+      <Job type="lucky" winner="TESTE NOME" />
     </div>
   </div>
 </template>
 
 <script>
 import Button from "./Button";
+import Job from "./Job";
 export default {
   name: "app",
   components: {
-    Button
+    Button,
+    Job
   },
   data() {
     return {
       zeroJanela: false,
-      primeiraJanela: true,
+      primeiraJanela: false,
       segundaJanela: false,
-      terceiraJanela: false,
+      terceiraJanela: true,
       participantes: [],
       tarefas: []
     };
@@ -234,17 +242,17 @@ export default {
       this.primeiraJanela = false;
       this.segundaJanela = true;
       this.rodarRoleta();
-      // while (this.segundaJanela) {
-        // var img = document.getElementById("imageDaRoleta");
-        // img.style.transform = "rotate(90deg)";
-      // }
+      var that = this;
+      setTimeout(function() {
+        that.botaoResultados();
+      }, 5000);
     },
     rodarRoleta() {}
   }
 };
 </script>
 
-<style>
+<style scoped>
 @font-face {
   font-family: Roboto;
   src: url("./assets/Roboto-Light.ttf");
@@ -277,13 +285,22 @@ body {
   justify-content: center;
 }
 
-.primeiraJanela {
+.primeiraJanela,
+.terceiraJanela {
+  position: fixed;
+  margin: 0;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
   background-color: #eff3fc;
+  overflow: auto;
 }
 
 .primeiraJanelaTop {
   position: absolute;
   top: 0;
+  width: 100%;
 }
 
 .primeiraJanelaTopLogo {
@@ -320,7 +337,7 @@ h3 {
   margin-top: 15%;
 }
 
-h5{
+h5 {
   display: flex;
   font-size: 13px;
   color: #666666;
@@ -364,6 +381,7 @@ label {
 
 .tarefasOpcionais {
   display: flex;
+  justify-content: center;
 }
 
 .tarefaOpcionalBotao {
@@ -372,5 +390,9 @@ label {
 
 .botaoRoleta {
   color: #e3e3e3;
+}
+
+.primeiroResultado {
+  margin-top: 60px;
 }
 </style>

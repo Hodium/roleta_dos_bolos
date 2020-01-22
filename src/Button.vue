@@ -1,7 +1,7 @@
 <template>
   <div :id="buttonId" :class="getContainerClass()" @click="carregueiNoBotao">
     <img v-show="roulette" class="imagemNormal" src="./assets/btn3.svg" />
-    <img v-show="min_size" class="imagemAnormal" src="./assets/btn2.svg" /> 
+    <img v-show="min_size" class="imagemAnormal" src="./assets/btn2.svg" />
     <img v-show="!pressed && !roulette && !min_size" class="imagemNormal" src="./assets/btn.svg" />
     <img v-show="pressed && !roulette && !min_size" class="imagemNormal" src="./assets/btn4.svg" />
     <div v-show="!min_size" class="centered">{{name}}</div>
@@ -36,7 +36,25 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+@font-face {
+  font-family: Roboto;
+  src: url("./assets/Roboto-Light.ttf");
+}
+
+* {
+  font-family: "Roboto", sans-serif;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+}
+
 *:focus {
   outline: 0;
   outline: none;
@@ -47,7 +65,8 @@ export default {
 }
 
 .imagemAnormal {
-  margin: -2%;
+  margin: -5%;
+  width: 110px
 }
 
 .container {
@@ -67,7 +86,7 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: fit-content
+  width: fit-content;
 }
 
 .centeredMin {
@@ -76,6 +95,6 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 13px;
-  word-wrap: break-word
+  word-wrap: break-word;
 }
 </style>
