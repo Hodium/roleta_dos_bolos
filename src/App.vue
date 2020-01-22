@@ -205,10 +205,10 @@ export default {
   },
   data() {
     return {
-      zeroJanela: false,
+      zeroJanela: true,
       primeiraJanela: false,
       segundaJanela: false,
-      terceiraJanela: true,
+      terceiraJanela: false,
       participantes: [],
       tarefas: []
     };
