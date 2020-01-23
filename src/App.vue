@@ -3,6 +3,49 @@
     <div v-show="mainScreen" @click="advanceToMenu" class="mainScreen">
       <img src="./assets/logo.svg" />
     </div>
+    <div v-show="menuScreen" class="mainScreen">
+      <div>
+        <img class="imageMenuScreen" src="./assets/logo.svg" />
+        <Button
+          buttonId="m1"
+          name="SORTEIO DE DOMINGO"
+          :min_size="false"
+          :menu="true"
+          @buttonPressed="buttonPressed"
+        ></Button>
+        <Button
+          buttonId="m2"
+          name="LISTA DE COMPRAS"
+          :min_size="false"
+          :menu="true"
+          @buttonPressed="buttonPressed"
+        ></Button>
+        <Button
+          buttonId="m3"
+          name="CALENDÁRIO"
+          :min_size="false"
+          :menu="true"
+          @buttonPressed="buttonPressed"
+        ></Button>
+        <Button
+          buttonId="m4"
+          name="MURAL DA VERGONHA"
+          :min_size="false"
+          :menu="true"
+          @buttonPressed="buttonPressed"
+        ></Button>
+        <Button
+          buttonId="m5"
+          name="LISTA DOS BOLOS"
+          :min_size="false"
+          :menu="true"
+          @buttonPressed="buttonPressed"
+        ></Button>
+      </div>
+      <div class="footerFixedWhite">
+        <label>Todos os direitos reservados @ Carmen Martins & Pedro Oliveira . 2020</label>
+      </div>
+    </div>
     <div v-show="pickingScreen" class="otherScreen">
       <img src="./assets/logoTop.svg" class="otherScreenTop" @click="goHome" />
       <img src="./assets/logo.svg" class="otherScreenTopLogo" @click="goHome" />
@@ -157,7 +200,8 @@
     <div v-show="resultsScreen" class="otherScreen">
       <img src="./assets/logoTop.svg" class="otherScreenTop" @click="goHome" />
       <img src="./assets/logo.svg" class="otherScreenTopLogo" @click="goHome" />
-      <Job type="shop" class="firstResult" winner="TESTE NOME" />
+      <Job type="plate" class="firstResult" winner="TESTE NOME" />
+      <Job type="shop" winner="TESTE NOME" />
       <Job type="meals" winner="TESTE NOME" />
       <Job type="settable" winner="TESTE NOME" />
       <Job type="cleartable" winner="TESTE NOME" />
@@ -190,6 +234,7 @@ export default {
   data() {
     return {
       mainScreen: true,
+      menuScreen: false,
       pickingScreen: false,
       waitingScreen: false,
       resultsScreen: false,
@@ -200,12 +245,26 @@ export default {
   methods: {
     advanceToMenu() {
       this.mainScreen = false;
-      this.pickingScreen = true;
+      this.menuScreen = true;
     },
     buttonPressed(id) {
       if (id.includes("p")) this.cakeButton(id);
       else if (id.includes("t")) this.taskButton(id);
+      else if (id.includes("m")) this.menuButton(id);
       else this.rouletteButton();
+    },
+    menuButton(id) {
+      this.menuScreen = false;
+      switch (id) {
+        case "m1":
+          this.pickingScreen = true;
+          break;
+        case "m2":
+        case "m3":
+        case "m4":
+        case "m5":
+          break;
+      }
     },
     cakeButton(id) {
       var index = this.cakes.indexOf(id);
@@ -230,7 +289,7 @@ export default {
       var that = this;
       setTimeout(function() {
         that.resultButton();
-      }, 5000);
+      }, 3000);
     },
     spinTheRoulette() {
       this.tasks.forEach(() => {
@@ -307,6 +366,12 @@ body {
   margin-top: 5%;
 }
 
+.imageMenuScreen {
+  margin-left: 12%;
+  margin-top: 15%;
+  margin-bottom: 20%;
+}
+
 .centered {
   display: grid;
   justify-content: center;
@@ -363,12 +428,22 @@ label {
   justify-content: center;
 }
 
+.footerFixedWhite {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  color: #ffffff;
+}
+
 .footerFixed {
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
   text-align: center;
+  color: #666666;
 }
 
 .footer {
@@ -376,6 +451,7 @@ label {
   bottom: 0;
   width: 100%;
   text-align: center;
+  color: #666666;
 }
 
 .optionalTasks {

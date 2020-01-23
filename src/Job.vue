@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <img class="base" src="./assets/btn5.svg" />
+    <img v-if="type == 'plate'" class="top0" src="./assets/plate.svg" />
     <img v-if="type == 'shop'" class="top1" src="./assets/shop.svg" />
     <img v-if="type == 'meals'" class="top2" src="./assets/meals.svg" />
     <img v-if="type == 'settable'" class="top3" src="./assets/settable.svg" />
@@ -28,6 +29,8 @@ export default {
   methods: {
     getTask(type) {
       switch (type) {
+        case "plate":
+          return "PRATO";
         case "shop":
           return "IR ÀS COMPRAS";
         case "meals":
@@ -115,6 +118,11 @@ hr {
   margin-top: 110px;
   width: fit-content;
   font-size: 20px;
+}
+
+.top0{
+  position: absolute;
+  transform: translate(-135%, 20%);
 }
 
 .top1,
