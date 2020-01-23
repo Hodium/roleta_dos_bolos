@@ -1,9 +1,9 @@
 <template>
-  <div :id="buttonId" :class="getContainerClass()" @click="carregueiNoBotao">
-    <img v-show="roulette" class="imagemNormal" src="./assets/btn3.svg" />
-    <img v-show="min_size" class="imagemAnormal" src="./assets/btn2.svg" />
-    <img v-show="!pressed && !roulette && !min_size" class="imagemNormal" src="./assets/btn.svg" />
-    <img v-show="pressed && !roulette && !min_size" class="imagemNormal" src="./assets/btn4.svg" />
+  <div :id="buttonId" :class="getContainerClass()" @click="buttonPressed">
+    <img v-show="roulette" class="regularImage" src="./assets/btn3.svg" />
+    <img v-show="min_size" class="irregularImage" src="./assets/btn2.svg" />
+    <img v-show="!pressed && !roulette && !min_size" class="regularImage" src="./assets/btn.svg" />
+    <img v-show="pressed && !roulette && !min_size" class="regularImage" src="./assets/btn4.svg" />
     <div v-show="!min_size" class="centered">{{name}}</div>
     <div v-show="min_size" class="centeredMin">{{name}}</div>
   </div>
@@ -24,9 +24,9 @@ export default {
     min_size: Boolean
   },
   methods: {
-    carregueiNoBotao() {
+    buttonPressed() {
       this.pressed = !this.pressed;
-      this.$emit("carregueiNoBotao", this.buttonId);
+      this.$emit("buttonPressed", this.buttonId);
     },
     getContainerClass() {
       if (this.buttonId.indexOf("r") == 0) return "containerRou";
@@ -45,6 +45,7 @@ export default {
 * {
   font-family: "Roboto", sans-serif;
   -webkit-user-select: none;
+  -webkit-touch-callout: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -60,13 +61,13 @@ body {
   outline: none;
 }
 
-.imagemNormal {
+.regularImage {
   margin: -2%;
 }
 
-.imagemAnormal {
+.irregularImage {
   margin: -5%;
-  width: 110px
+  width: 110px;
 }
 
 .container {

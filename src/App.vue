@@ -1,187 +1,163 @@
 <template>
   <div id="app">
-    <div v-show="zeroJanela" @click="avancarPrimeiraJanela" class="zeroJanela">
+    <div v-show="mainScreen" @click="advanceToMenu" class="mainScreen">
       <img src="./assets/logo.svg" />
     </div>
-    <div v-show="primeiraJanela" class="primeiraJanela">
-      <img src="./assets/logoTop.svg" class="primeiraJanelaTop" />
-      <img src="./assets/logo.svg" class="primeiraJanelaTopLogo" />
+    <div v-show="pickingScreen" class="otherScreen">
+      <img src="./assets/logoTop.svg" class="otherScreenTop" @click="goHome" />
+      <img src="./assets/logo.svg" class="otherScreenTopLogo" @click="goHome" />
       <h3>ESCOLHE AS TAREFAS:</h3>
-      <div class="tarefasTodas">
-        <Button
-          buttonId="t1"
-          name="IR ÀS COMPRAS"
-          :min_size="false"
-          @carregueiNoBotao="carregueiNoBotao"
-        ></Button>
+      <div class="alignCenterVertical">
+        <Button buttonId="t1" name="IR ÀS COMPRAS" :min_size="false" @buttonPressed="buttonPressed"></Button>
         <Button
           buttonId="t2"
           name="PREPARAR AS REFEIÇÔES"
           :min_size="false"
-          @carregueiNoBotao="carregueiNoBotao"
+          @buttonPressed="buttonPressed"
         ></Button>
-        <Button
-          buttonId="t3"
-          name="PÔR A MESA"
-          :min_size="false"
-          @carregueiNoBotao="carregueiNoBotao"
-        ></Button>
+        <Button buttonId="t3" name="PÔR A MESA" :min_size="false" @buttonPressed="buttonPressed"></Button>
         <Button
           buttonId="t4"
           name="LEVANTAR A MESA"
           :min_size="false"
-          @carregueiNoBotao="carregueiNoBotao"
+          @buttonPressed="buttonPressed"
         ></Button>
-        <Button
-          buttonId="t5"
-          name="LAVAR A LOIÇA"
-          :min_size="false"
-          @carregueiNoBotao="carregueiNoBotao"
-        ></Button>
-        <div class="tarefasOpcionais">
+        <Button buttonId="t5" name="LAVAR A LOIÇA" :min_size="false" @buttonPressed="buttonPressed"></Button>
+        <div class="optionalTasks">
           <Button
             buttonId="t6"
             name="VARRER O CHÃO"
             :min_size="true"
-            @carregueiNoBotao="carregueiNoBotao"
+            @buttonPressed="buttonPressed"
           ></Button>
           <Button
             buttonId="t7"
             name="SECAR A LOIÇA"
             :min_size="true"
-            @carregueiNoBotao="carregueiNoBotao"
+            @buttonPressed="buttonPressed"
           ></Button>
-          <Button
-            buttonId="t8"
-            name="LEVAR O LIXO"
-            :min_size="true"
-            @carregueiNoBotao="carregueiNoBotao"
-          ></Button>
+          <Button buttonId="t8" name="LEVAR O LIXO" :min_size="true" @buttonPressed="buttonPressed"></Button>
         </div>
       </div>
       <h3>ESCOLHE OS BOLOS:</h3>
-      <div class="tarefasTodas">
+      <div class="alignCenterVertical">
         <Button
           buttonId="p1"
           name="CARMEN MARTINS"
           :min_size="false"
-          @carregueiNoBotao="carregueiNoBotao"
+          @buttonPressed="buttonPressed"
         ></Button>
         <Button
           buttonId="p2"
           name="PEDRO OLIVEIRA"
           :min_size="false"
-          @carregueiNoBotao="carregueiNoBotao"
+          @buttonPressed="buttonPressed"
         ></Button>
         <Button
           buttonId="p3"
           name="PATRÍCIA NEVES"
           :min_size="false"
-          @carregueiNoBotao="carregueiNoBotao"
+          @buttonPressed="buttonPressed"
         ></Button>
         <Button
           buttonId="p4"
           name="PEDRO SARDINHA"
           :min_size="false"
-          @carregueiNoBotao="carregueiNoBotao"
+          @buttonPressed="buttonPressed"
         ></Button>
         <Button
           buttonId="p5"
           name="MIGUEL CASTELA"
           :min_size="false"
-          @carregueiNoBotao="carregueiNoBotao"
+          @buttonPressed="buttonPressed"
         ></Button>
-        <Button
-          buttonId="p6"
-          name="RAFAELA ROSA"
-          :min_size="false"
-          @carregueiNoBotao="carregueiNoBotao"
-        ></Button>
+        <Button buttonId="p6" name="RAFAELA ROSA" :min_size="false" @buttonPressed="buttonPressed"></Button>
         <Button
           buttonId="p7"
           name="SOFIA COTRIM SANTOS"
           :min_size="false"
-          @carregueiNoBotao="carregueiNoBotao"
+          @buttonPressed="buttonPressed"
         ></Button>
         <Button
           buttonId="p8"
           name="OSÉ MIGUEL POMBO"
           :min_size="false"
-          @carregueiNoBotao="carregueiNoBotao"
+          @buttonPressed="buttonPressed"
         ></Button>
         <Button
           buttonId="p9"
           name="RUI COTRIM SANTOS"
           :min_size="false"
-          @carregueiNoBotao="carregueiNoBotao"
+          @buttonPressed="buttonPressed"
         ></Button>
         <Button
           buttonId="p10"
           name="CATARINA SANTOS"
           :min_size="false"
-          @carregueiNoBotao="carregueiNoBotao"
+          @buttonPressed="buttonPressed"
         ></Button>
         <Button
           buttonId="p11"
           name="ALESSANDRO GUZZO"
           :min_size="false"
-          @carregueiNoBotao="carregueiNoBotao"
+          @buttonPressed="buttonPressed"
         ></Button>
         <Button
           buttonId="p12"
           name="TERESA GUIOMAR"
           :min_size="false"
-          @carregueiNoBotao="carregueiNoBotao"
+          @buttonPressed="buttonPressed"
         ></Button>
         <Button
           buttonId="p13"
           name="FILIPE FERNANDES"
           :min_size="false"
-          @carregueiNoBotao="carregueiNoBotao"
+          @buttonPressed="buttonPressed"
         ></Button>
-        <Button
-          buttonId="p14"
-          name="JOANA LOPES"
-          :min_size="false"
-          @carregueiNoBotao="carregueiNoBotao"
-        ></Button>
+        <Button buttonId="p14" name="JOANA LOPES" :min_size="false" @buttonPressed="buttonPressed"></Button>
         <Button
           buttonId="p15"
           name="RODRIGO TEIXEIRA"
           :min_size="false"
-          @carregueiNoBotao="carregueiNoBotao"
+          @buttonPressed="buttonPressed"
+        ></Button>
+        <Button buttonId="p16" name="ANDRÉ ROLIZ" :min_size="false" @buttonPressed="buttonPressed"></Button>
+        <Button
+          buttonId="p17"
+          name="MARIANA AMARAO"
+          :min_size="false"
+          @buttonPressed="buttonPressed"
         ></Button>
       </div>
-      <div class="tarefasTodas">
+      <div class="alignCenterVertical">
         <Button
           buttonId="r1"
           name="ROLETA DA SORTE"
           :min_size="false"
           :roulette="true"
-          @carregueiNoBotao="carregueiNoBotao"
+          @buttonPressed="buttonPressed"
         ></Button>
+      </div>
+      <div class="footer">
         <label>Todos os direitos reservados @ Carmen Martins & Pedro Oliveira . 2020</label>
       </div>
     </div>
-    <div v-show="segundaJanela" class="segundaJanela">
-      <img src="./assets/logoTop.svg" class="primeiraJanelaTop" />
-      <img src="./assets/logo.svg" class="primeiraJanelaTopLogo" />
-      <div class="centrado">
+    <div v-show="waitingScreen" class="otherScreen">
+      <img src="./assets/logoTop.svg" class="otherScreenTop" @click="goHome" />
+      <img src="./assets/logo.svg" class="otherScreenTopLogo" @click="goHome" />
+      <div class="centered">
         <h3>DESCOBRE A TUA TAREFA DE DOMINGO!</h3>
         <h5>QUE A SORTE ESTEJA CONTIGO.</h5>
-        <img id="imageDaRoleta" src="./assets/roulette.gif" />
+        <img src="./assets/roulette.gif" />
       </div>
-      <Button
-        buttonId="v1"
-        name="RESULTADOS"
-        :min_size="false"
-        @carregueiNoBotao="carregueiNoBotao"
-      ></Button>
+      <div class="footerFixed">
+        <label>Todos os direitos reservados @ Carmen Martins & Pedro Oliveira . 2020</label>
+      </div>
     </div>
-    <div v-show="terceiraJanela" class="terceiraJanela">
-      <img src="./assets/logoTop.svg" class="primeiraJanelaTop" />
-      <img src="./assets/logo.svg" class="primeiraJanelaTopLogo" />
-      <Job type="shop" class="primeiroResultado" winner="TESTE NOME" />
+    <div v-show="resultsScreen" class="otherScreen">
+      <img src="./assets/logoTop.svg" class="otherScreenTop" @click="goHome" />
+      <img src="./assets/logo.svg" class="otherScreenTopLogo" @click="goHome" />
+      <Job type="shop" class="firstResult" winner="TESTE NOME" />
       <Job type="meals" winner="TESTE NOME" />
       <Job type="settable" winner="TESTE NOME" />
       <Job type="cleartable" winner="TESTE NOME" />
@@ -190,6 +166,9 @@
       <Job type="dry" winner="TESTE NOME" />
       <Job type="trash" winner="TESTE NOME" />
       <Job type="lucky" winner="TESTE NOME" />
+      <div class="footer">
+        <label>Todos os direitos reservados @ Carmen Martins & Pedro Oliveira . 2020</label>
+      </div>
     </div>
   </div>
 </template>
@@ -203,51 +182,66 @@ export default {
     Button,
     Job
   },
+  created() {
+    document.addEventListener("contextmenu", function(e) {
+      e.preventDefault();
+    });
+  },
   data() {
     return {
-      zeroJanela: true,
-      primeiraJanela: false,
-      segundaJanela: false,
-      terceiraJanela: false,
-      participantes: [],
-      tarefas: []
+      mainScreen: true,
+      pickingScreen: false,
+      waitingScreen: false,
+      resultsScreen: false,
+      cakes: [],
+      tasks: []
     };
   },
   methods: {
-    avancarPrimeiraJanela() {
-      this.zeroJanela = false;
-      this.primeiraJanela = true;
+    advanceToMenu() {
+      this.mainScreen = false;
+      this.pickingScreen = true;
     },
-    carregueiNoBotao(id) {
-      if (id.includes("p")) this.botaoParticipante(id);
-      else if (id.includes("t")) this.botaoTarefa(id);
-      else if (id.includes("v")) this.botaoResultados(id);
-      else this.botaoRoleta();
+    buttonPressed(id) {
+      if (id.includes("p")) this.cakeButton(id);
+      else if (id.includes("t")) this.taskButton(id);
+      else this.rouletteButton();
     },
-    botaoParticipante(id) {
-      var index = this.participantes.indexOf(id);
-      if (index != -1) this.participantes.splice(id, 1);
-      else this.participantes.push(id);
+    cakeButton(id) {
+      var index = this.cakes.indexOf(id);
+      if (index != -1) this.cakes.splice(id, 1);
+      else this.cakes.push(id);
     },
-    botaoTarefa(id) {
-      var index = this.tarefas.indexOf(id);
-      if (index != -1) this.tarefas.splice(id, 1);
-      else this.tarefas.push(id);
+    goHome() {
+      return;
+      // this.mainScreen = true;
+      // this.pickingScreen = false;
+      // this.waitingScreen = false;
+      // this.resultsScreen = false;
     },
-    botaoResultados() {
-      this.segundaJanela = false;
-      this.terceiraJanela = true;
+    resultButton() {
+      this.waitingScreen = false;
+      this.resultsScreen = true;
     },
-    botaoRoleta() {
-      this.primeiraJanela = false;
-      this.segundaJanela = true;
-      this.rodarRoleta();
+    rouletteButton() {
+      this.pickingScreen = false;
+      this.waitingScreen = true;
+      this.spinTheRoulette();
       var that = this;
       setTimeout(function() {
-        that.botaoResultados();
+        that.resultButton();
       }, 5000);
     },
-    rodarRoleta() {}
+    spinTheRoulette() {
+      this.tasks.forEach(() => {
+        //TODO
+      });
+    },
+    taskButton(id) {
+      var index = this.tasks.indexOf(id);
+      if (index != -1) this.tasks.splice(id, 1);
+      else this.tasks.push(id);
+    }
   }
 };
 </script>
@@ -261,6 +255,7 @@ export default {
 * {
   font-family: "Roboto", sans-serif;
   -webkit-user-select: none;
+  -webkit-touch-callout: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -271,7 +266,7 @@ body {
   height: 100%;
 }
 
-.zeroJanela {
+.mainScreen {
   position: fixed;
   margin: 0;
   top: 0;
@@ -285,8 +280,7 @@ body {
   justify-content: center;
 }
 
-.primeiraJanela,
-.terceiraJanela {
+.otherScreen {
   position: fixed;
   margin: 0;
   top: 0;
@@ -294,16 +288,18 @@ body {
   height: 100%;
   width: 100%;
   background-color: #eff3fc;
+  background-repeat: no-repeat;
+  background-size: auto;
   overflow: auto;
 }
 
-.primeiraJanelaTop {
+.otherScreenTop {
   position: absolute;
   top: 0;
   width: 100%;
 }
 
-.primeiraJanelaTopLogo {
+.otherScreenTopLogo {
   position: relative;
   top: 0;
   width: 45%;
@@ -311,19 +307,7 @@ body {
   margin-top: 5%;
 }
 
-.segundaJanela {
-  position: fixed;
-  margin: 0;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-repeat: no-repeat;
-  background-size: auto;
-  background-color: #eff3fc;
-}
-
-.centrado {
+.centered {
   display: grid;
   justify-content: center;
   margin-bottom: 5%;
@@ -374,25 +358,36 @@ label {
   text-align: center;
 }
 
-.tarefasTodas {
+.alignCenterVertical {
   display: grid;
   justify-content: center;
 }
 
-.tarefasOpcionais {
+.footerFixed {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.footer {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.optionalTasks {
   display: flex;
   justify-content: center;
 }
 
-.tarefaOpcionalBotao {
-  float: left;
-}
-
-.botaoRoleta {
+.rouletteButton {
   color: #e3e3e3;
 }
 
-.primeiroResultado {
+.firstResult {
   margin-top: 60px;
 }
 </style>
