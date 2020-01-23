@@ -9,35 +9,30 @@
         <Button
           buttonId="m1"
           name="SORTEIO DE DOMINGO"
-          :min_size="false"
           :menu="true"
           @buttonPressed="buttonPressed"
         ></Button>
         <Button
           buttonId="m2"
           name="LISTA DE COMPRAS"
-          :min_size="false"
           :menu="true"
           @buttonPressed="buttonPressed"
         ></Button>
         <Button
           buttonId="m3"
           name="CALENDÁRIO"
-          :min_size="false"
           :menu="true"
           @buttonPressed="buttonPressed"
         ></Button>
         <Button
           buttonId="m4"
           name="MURAL DA VERGONHA"
-          :min_size="false"
           :menu="true"
           @buttonPressed="buttonPressed"
         ></Button>
         <Button
           buttonId="m5"
           name="LISTA DOS BOLOS"
-          :min_size="false"
           :menu="true"
           @buttonPressed="buttonPressed"
         ></Button>
@@ -51,21 +46,21 @@
       <img src="./assets/logo.svg" class="otherScreenTopLogo" @click="goHome" />
       <h3>ESCOLHE AS TAREFAS:</h3>
       <div class="alignCenterVertical">
-        <Button buttonId="t1" name="IR ÀS COMPRAS" :min_size="false" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="t1" name="IR ÀS COMPRAS" :regular="true" @buttonPressed="buttonPressed"></Button>
         <Button
           buttonId="t2"
           name="PREPARAR AS REFEIÇÔES"
-          :min_size="false"
+          :regular="true"
           @buttonPressed="buttonPressed"
         ></Button>
-        <Button buttonId="t3" name="PÔR A MESA" :min_size="false" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="t3" name="PÔR A MESA" :regular="true" @buttonPressed="buttonPressed"></Button>
         <Button
           buttonId="t4"
           name="LEVANTAR A MESA"
-          :min_size="false"
+          :regular="true"
           @buttonPressed="buttonPressed"
         ></Button>
-        <Button buttonId="t5" name="LAVAR A LOIÇA" :min_size="false" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="t5" name="LAVAR A LOIÇA" :regular="true" @buttonPressed="buttonPressed"></Button>
         <div class="optionalTasks">
           <Button
             buttonId="t6"
@@ -87,88 +82,88 @@
         <Button
           buttonId="p1"
           name="CARMEN MARTINS"
-          :min_size="false"
+          :regular="true"
           @buttonPressed="buttonPressed"
         ></Button>
         <Button
           buttonId="p2"
           name="PEDRO OLIVEIRA"
-          :min_size="false"
+          :regular="true"
           @buttonPressed="buttonPressed"
         ></Button>
         <Button
           buttonId="p3"
           name="PATRÍCIA NEVES"
-          :min_size="false"
+          :regular="true"
           @buttonPressed="buttonPressed"
         ></Button>
         <Button
           buttonId="p4"
           name="PEDRO SARDINHA"
-          :min_size="false"
+          :regular="true"
           @buttonPressed="buttonPressed"
         ></Button>
         <Button
           buttonId="p5"
           name="MIGUEL CASTELA"
-          :min_size="false"
+          :regular="true"
           @buttonPressed="buttonPressed"
         ></Button>
-        <Button buttonId="p6" name="RAFAELA ROSA" :min_size="false" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="p6" name="RAFAELA ROSA" :regular="true" @buttonPressed="buttonPressed"></Button>
         <Button
           buttonId="p7"
           name="SOFIA COTRIM SANTOS"
-          :min_size="false"
+          :regular="true"
           @buttonPressed="buttonPressed"
         ></Button>
         <Button
           buttonId="p8"
           name="OSÉ MIGUEL POMBO"
-          :min_size="false"
+          :regular="true"
           @buttonPressed="buttonPressed"
         ></Button>
         <Button
           buttonId="p9"
           name="RUI COTRIM SANTOS"
-          :min_size="false"
+          :regular="true"
           @buttonPressed="buttonPressed"
         ></Button>
         <Button
           buttonId="p10"
           name="CATARINA SANTOS"
-          :min_size="false"
+          :regular="true"
           @buttonPressed="buttonPressed"
         ></Button>
         <Button
           buttonId="p11"
           name="ALESSANDRO GUZZO"
-          :min_size="false"
+          :regular="true"
           @buttonPressed="buttonPressed"
         ></Button>
         <Button
           buttonId="p12"
           name="TERESA GUIOMAR"
-          :min_size="false"
+          :regular="true"
           @buttonPressed="buttonPressed"
         ></Button>
         <Button
           buttonId="p13"
           name="FILIPE FERNANDES"
-          :min_size="false"
+          :regular="true"
           @buttonPressed="buttonPressed"
         ></Button>
-        <Button buttonId="p14" name="JOANA LOPES" :min_size="false" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="p14" name="JOANA LOPES" :regular="true" @buttonPressed="buttonPressed"></Button>
         <Button
           buttonId="p15"
           name="RODRIGO TEIXEIRA"
-          :min_size="false"
+          :regular="true"
           @buttonPressed="buttonPressed"
         ></Button>
-        <Button buttonId="p16" name="ANDRÉ ROLIZ" :min_size="false" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="p16" name="ANDRÉ ROLIZ" :regular="true" @buttonPressed="buttonPressed"></Button>
         <Button
           buttonId="p17"
           name="MARIANA AMARAO"
-          :min_size="false"
+          :regular="true"
           @buttonPressed="buttonPressed"
         ></Button>
       </div>
@@ -176,7 +171,6 @@
         <Button
           buttonId="r1"
           name="ROLETA DA SORTE"
-          :min_size="false"
           :roulette="true"
           @buttonPressed="buttonPressed"
         ></Button>
@@ -263,6 +257,7 @@ export default {
         case "m3":
         case "m4":
         case "m5":
+          this.menuScreen = true;
           break;
       }
     },
@@ -368,7 +363,7 @@ body {
 
 .imageMenuScreen {
   margin-left: 12%;
-  margin-top: 15%;
+  margin-top: 10%;
   margin-bottom: 20%;
 }
 

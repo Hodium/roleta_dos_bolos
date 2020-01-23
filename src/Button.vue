@@ -1,10 +1,11 @@
 <template>
   <div :id="buttonId" :class="getContainerClass()" @click="buttonPressed">
-    <img v-show="menu && !roulette" class="regularImage" src="./assets/menuBtn.svg" />
-    <img v-show="roulette && !menu" class="regularImage" src="./assets/btn3.svg" />
-    <img v-show="min_size" class="irregularImage" src="./assets/btn2.svg" />
-    <img v-show="!pressed && !roulette && !min_size && !menu" class="regularImage" src="./assets/btn.svg" />
-    <img v-show="pressed && !roulette && !min_size && !menu" class="regularImage" src="./assets/btn4.svg" />
+    <img v-show="menu" class="regularImage" src="./assets/menuBtn.svg" />
+    <img v-show="roulette" class="regularImage" src="./assets/rouletteBtn.svg" />
+    <img v-show="min_size && !pressed" class="irregularImage" src="./assets/smallBtn.svg" />
+    <img v-show="min_size && pressed" class="irregularImage" src="./assets/smallBtnPressed.svg" />
+    <img v-show="regular && !pressed" class="regularImage" src="./assets/regularBtn.svg" />
+    <img v-show="regular && pressed" class="regularImage" src="./assets/regularBtnPressed.svg" />
     <div v-show="!min_size" class="centered">{{name}}</div>
     <div v-show="min_size" class="centeredMin">{{name}}</div>
   </div>
@@ -20,6 +21,7 @@ export default {
   },
   props: {
     menu: Boolean,
+    regular: Boolean,
     roulette: Boolean,
     min_size: Boolean,
     buttonId: String,
@@ -31,7 +33,8 @@ export default {
       this.$emit("buttonPressed", this.buttonId);
     },
     getContainerClass() {
-      if (this.buttonId.indexOf("r") == 0 || this.buttonId.indexOf("m") == 0) return "containerRou";
+      if (this.buttonId.indexOf("r") == 0 || this.buttonId.indexOf("m") == 0)
+        return "containerRou";
       else return "container";
     }
   }
@@ -82,7 +85,7 @@ body {
   position: relative;
   text-align: center;
   color: #e3e3e3;
-  font-weight: bold
+  font-weight: bold;
 }
 
 .centered {
