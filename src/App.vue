@@ -3,39 +3,14 @@
     <div v-show="mainScreen" @click="advanceToMenu" class="mainScreen">
       <img src="./assets/logo.svg" />
     </div>
-    <div v-show="menuScreen" class="mainScreen">
+    <div v-show="menuScreen" class="menuScreen">
       <div>
         <img class="imageMenuScreen" src="./assets/logo.svg" />
-        <Button
-          buttonId="m1"
-          name="SORTEIO DE DOMINGO"
-          :menu="true"
-          @buttonPressed="buttonPressed"
-        ></Button>
-        <Button
-          buttonId="m2"
-          name="LISTA DE COMPRAS"
-          :menu="true"
-          @buttonPressed="buttonPressed"
-        ></Button>
-        <Button
-          buttonId="m3"
-          name="CALENDÁRIO"
-          :menu="true"
-          @buttonPressed="buttonPressed"
-        ></Button>
-        <Button
-          buttonId="m4"
-          name="MURAL DA VERGONHA"
-          :menu="true"
-          @buttonPressed="buttonPressed"
-        ></Button>
-        <Button
-          buttonId="m5"
-          name="LISTA DOS BOLOS"
-          :menu="true"
-          @buttonPressed="buttonPressed"
-        ></Button>
+        <Button buttonId="m1" name="SORTEIO DE DOMINGO" :menu="true" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="m2" name="LISTA DE COMPRAS" :menu="true" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="m3" name="CALENDÁRIO" :menu="true" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="m4" name="MURAL DA VERGONHA" :menu="true" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="m5" name="LISTA DOS BOLOS" :menu="true" @buttonPressed="buttonPressed"></Button>
       </div>
       <div class="footerFixedWhite">
         <label>Todos os direitos reservados @ Carmen Martins & Pedro Oliveira . 2020</label>
@@ -54,12 +29,7 @@
           @buttonPressed="buttonPressed"
         ></Button>
         <Button buttonId="t3" name="PÔR A MESA" :regular="true" @buttonPressed="buttonPressed"></Button>
-        <Button
-          buttonId="t4"
-          name="LEVANTAR A MESA"
-          :regular="true"
-          @buttonPressed="buttonPressed"
-        ></Button>
+        <Button buttonId="t4" name="LEVANTAR A MESA" :regular="true" @buttonPressed="buttonPressed"></Button>
         <Button buttonId="t5" name="LAVAR A LOIÇA" :regular="true" @buttonPressed="buttonPressed"></Button>
         <div class="optionalTasks">
           <Button
@@ -79,36 +49,11 @@
       </div>
       <h3>ESCOLHE OS BOLOS:</h3>
       <div class="alignCenterVertical">
-        <Button
-          buttonId="p1"
-          name="CARMEN MARTINS"
-          :regular="true"
-          @buttonPressed="buttonPressed"
-        ></Button>
-        <Button
-          buttonId="p2"
-          name="PEDRO OLIVEIRA"
-          :regular="true"
-          @buttonPressed="buttonPressed"
-        ></Button>
-        <Button
-          buttonId="p3"
-          name="PATRÍCIA NEVES"
-          :regular="true"
-          @buttonPressed="buttonPressed"
-        ></Button>
-        <Button
-          buttonId="p4"
-          name="PEDRO SARDINHA"
-          :regular="true"
-          @buttonPressed="buttonPressed"
-        ></Button>
-        <Button
-          buttonId="p5"
-          name="MIGUEL CASTELA"
-          :regular="true"
-          @buttonPressed="buttonPressed"
-        ></Button>
+        <Button buttonId="p1" name="CARMEN MARTINS" :regular="true" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="p2" name="PEDRO OLIVEIRA" :regular="true" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="p3" name="PATRÍCIA NEVES" :regular="true" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="p4" name="PEDRO SARDINHA" :regular="true" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="p5" name="MIGUEL CASTELA" :regular="true" @buttonPressed="buttonPressed"></Button>
         <Button buttonId="p6" name="RAFAELA ROSA" :regular="true" @buttonPressed="buttonPressed"></Button>
         <Button
           buttonId="p7"
@@ -140,12 +85,7 @@
           :regular="true"
           @buttonPressed="buttonPressed"
         ></Button>
-        <Button
-          buttonId="p12"
-          name="TERESA GUIOMAR"
-          :regular="true"
-          @buttonPressed="buttonPressed"
-        ></Button>
+        <Button buttonId="p12" name="TERESA GUIOMAR" :regular="true" @buttonPressed="buttonPressed"></Button>
         <Button
           buttonId="p13"
           name="FILIPE FERNANDES"
@@ -160,12 +100,7 @@
           @buttonPressed="buttonPressed"
         ></Button>
         <Button buttonId="p16" name="ANDRÉ ROLIZ" :regular="true" @buttonPressed="buttonPressed"></Button>
-        <Button
-          buttonId="p17"
-          name="MARIANA AMARAO"
-          :regular="true"
-          @buttonPressed="buttonPressed"
-        ></Button>
+        <Button buttonId="p17" name="MARIANA AMARO" :regular="true" @buttonPressed="buttonPressed"></Button>
       </div>
       <div class="alignCenterVertical">
         <Button
@@ -182,10 +117,10 @@
     <div v-show="waitingScreen" class="otherScreen">
       <img src="./assets/logoTop.svg" class="otherScreenTop" @click="goHome" />
       <img src="./assets/logo.svg" class="otherScreenTopLogo" @click="goHome" />
-      <div class="centered">
+      <div class="centered titleAndRoulette">
         <h3>DESCOBRE A TUA TAREFA DE DOMINGO!</h3>
         <h5>QUE A SORTE ESTEJA CONTIGO.</h5>
-        <img src="./assets/roulette.gif" />
+        <img class="roulette" src="./assets/roulette.gif" />
       </div>
       <div class="footerFixed">
         <label>Todos os direitos reservados @ Carmen Martins & Pedro Oliveira . 2020</label>
@@ -233,7 +168,10 @@ export default {
       waitingScreen: false,
       resultsScreen: false,
       cakes: [],
-      tasks: []
+      tasks: [],
+      plates: ["CACHORROS", "ESPARGUETE À BOLONHESA", "ESPARUETE À CARBONARA",
+      "HAMBURGUER", "MASSA COM ATUM", "FRANGO ASSADO", "MASSA COM NATAS E SALSICHAS",
+      "WRAPS", "LASANHA", "BIFINHOS COM NATAS", "PICA-PAU", "FRANGO À BRAZ"]
     };
   },
   methods: {
@@ -320,6 +258,10 @@ body {
   height: 100%;
 }
 
+.roulette{
+  margin-top: 50px
+}
+
 .mainScreen {
   position: fixed;
   margin: 0;
@@ -331,6 +273,20 @@ body {
   background-repeat: no-repeat;
   background-size: auto;
   display: flex;
+  justify-content: center;
+}
+
+.menuScreen{
+  position: fixed;
+  margin: 0;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: url("./assets/bck.svg");
+  background-repeat: no-repeat;
+  background-size: auto;
+  overflow: auto;
   justify-content: center;
 }
 
@@ -387,6 +343,10 @@ h5 {
   color: #666666;
   margin-top: -5%;
   margin-left: 18%;
+}
+
+.titleAndRoulette{
+  margin-top: 10%
 }
 
 .container {
