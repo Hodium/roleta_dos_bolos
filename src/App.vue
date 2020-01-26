@@ -49,58 +49,58 @@
       </div>
       <h3>ESCOLHE OS BOLOS:</h3>
       <div class="alignCenterVertical">
-        <Button buttonId="p1" name="CARMEN MARTINS" :regular="true" @buttonPressed="buttonPressed"></Button>
-        <Button buttonId="p2" name="PEDRO OLIVEIRA" :regular="true" @buttonPressed="buttonPressed"></Button>
-        <Button buttonId="p3" name="PATRÍCIA NEVES" :regular="true" @buttonPressed="buttonPressed"></Button>
-        <Button buttonId="p4" name="PEDRO SARDINHA" :regular="true" @buttonPressed="buttonPressed"></Button>
-        <Button buttonId="p5" name="MIGUEL CASTELA" :regular="true" @buttonPressed="buttonPressed"></Button>
-        <Button buttonId="p6" name="RAFAELA ROSA" :regular="true" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="c1" name="CARMEN MARTINS" :regular="true" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="c2" name="PEDRO OLIVEIRA" :regular="true" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="c3" name="PATRÍCIA NEVES" :regular="true" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="c4" name="PEDRO SARDINHA" :regular="true" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="c5" name="MIGUEL CASTELA" :regular="true" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="c6" name="RAFAELA ROSA" :regular="true" @buttonPressed="buttonPressed"></Button>
         <Button
-          buttonId="p7"
+          buttonId="c7"
           name="SOFIA COTRIM SANTOS"
           :regular="true"
           @buttonPressed="buttonPressed"
         ></Button>
         <Button
-          buttonId="p8"
-          name="OSÉ MIGUEL POMBO"
+          buttonId="c8"
+          name="JOSÉ MIGUEL POMBO"
           :regular="true"
           @buttonPressed="buttonPressed"
         ></Button>
         <Button
-          buttonId="p9"
+          buttonId="c9"
           name="RUI COTRIM SANTOS"
           :regular="true"
           @buttonPressed="buttonPressed"
         ></Button>
         <Button
-          buttonId="p10"
+          buttonId="c10"
           name="CATARINA SANTOS"
           :regular="true"
           @buttonPressed="buttonPressed"
         ></Button>
         <Button
-          buttonId="p11"
+          buttonId="c11"
           name="ALESSANDRO GUZZO"
           :regular="true"
           @buttonPressed="buttonPressed"
         ></Button>
-        <Button buttonId="p12" name="TERESA GUIOMAR" :regular="true" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="c12" name="TERESA GUIOMAR" :regular="true" @buttonPressed="buttonPressed"></Button>
         <Button
-          buttonId="p13"
+          buttonId="c13"
           name="FILIPE FERNANDES"
           :regular="true"
           @buttonPressed="buttonPressed"
         ></Button>
-        <Button buttonId="p14" name="JOANA LOPES" :regular="true" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="c14" name="JOANA LOPES" :regular="true" @buttonPressed="buttonPressed"></Button>
         <Button
-          buttonId="p15"
+          buttonId="c15"
           name="RODRIGO TEIXEIRA"
           :regular="true"
           @buttonPressed="buttonPressed"
         ></Button>
-        <Button buttonId="p16" name="ANDRÉ ROLIZ" :regular="true" @buttonPressed="buttonPressed"></Button>
-        <Button buttonId="p17" name="MARIANA AMARO" :regular="true" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="c16" name="ANDRÉ ROLIZ" :regular="true" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="c17" name="MARIANA AMARO" :regular="true" @buttonPressed="buttonPressed"></Button>
       </div>
       <div class="alignCenterVertical">
         <Button
@@ -129,16 +129,16 @@
     <div v-show="resultsScreen" class="otherScreen">
       <img src="./assets/logoTop.svg" class="otherScreenTop" @click="goHome" />
       <img src="./assets/logo.svg" class="otherScreenTopLogo" @click="goHome" />
-      <Job type="plate" class="firstResult" winner="TESTE NOME" />
-      <Job type="shop" winner="TESTE NOME" />
-      <Job type="meals" winner="TESTE NOME" />
-      <Job type="settable" winner="TESTE NOME" />
-      <Job type="cleartable" winner="TESTE NOME" />
-      <Job type="dishes" winner="TESTE NOME" />
-      <Job type="mop" winner="TESTE NOME" />
-      <Job type="dry" winner="TESTE NOME" />
-      <Job type="trash" winner="TESTE NOME" />
-      <Job type="lucky" winner="TESTE NOME" />
+      <Job type="plate" class="firstResult" :winner="getResult('plate')" />
+      <Job type="shop" :winner="getResult('t1')" />
+      <Job type="meals" :winner="getResult('t2')" />
+      <Job type="settable" :winner="getResult('t3')" />
+      <Job type="cleartable" :winner="getResult('t4')" />
+      <Job type="dishes" :winner="getResult('t5')" />
+      <Job type="mop" :winner="getResult('t6')" />
+      <Job type="dry" :winner="getResult('t7')" />
+      <Job type="trash" :winner="getResult('t8')" />
+      <Job type="lucky" :winner="getResult('t9')" />
       <div class="footer">
         <label>Todos os direitos reservados @ Carmen Martins & Pedro Oliveira . 2020</label>
       </div>
@@ -149,6 +149,7 @@
 <script>
 import Button from "./Button";
 import Job from "./Job";
+import results from "./results.json";
 export default {
   name: "app",
   components: {
@@ -169,9 +170,21 @@ export default {
       resultsScreen: false,
       cakes: [],
       tasks: [],
-      plates: ["CACHORROS", "ESPARGUETE À BOLONHESA", "ESPARUETE À CARBONARA",
-      "HAMBURGUER", "MASSA COM ATUM", "FRANGO ASSADO", "MASSA COM NATAS E SALSICHAS",
-      "WRAPS", "LASANHA", "BIFINHOS COM NATAS", "PICA-PAU", "FRANGO À BRAZ"]
+      resultList: [],
+      plates: [
+        "CACHORROS",
+        "ESPARGUETE À BOLONHESA",
+        "ESPARUETE À CARBONARA",
+        "HAMBURGUER",
+        "MASSA COM ATUM",
+        "FRANGO ASSADO",
+        "MASSA COM NATAS E SALSICHAS",
+        "WRAPS",
+        "LASANHA",
+        "BIFINHOS COM NATAS",
+        "PICA-PAU",
+        "FRANGO À BRAZ"
+      ]
     };
   },
   methods: {
@@ -180,7 +193,7 @@ export default {
       this.menuScreen = true;
     },
     buttonPressed(id) {
-      if (id.includes("p")) this.cakeButton(id);
+      if (id.includes("c")) this.cakeButton(id);
       else if (id.includes("t")) this.taskButton(id);
       else if (id.includes("m")) this.menuButton(id);
       else this.rouletteButton();
@@ -204,6 +217,15 @@ export default {
       if (index != -1) this.cakes.splice(id, 1);
       else this.cakes.push(id);
     },
+    getResult(id) {
+      var res = results[id];
+      var auxIndex = res.substring(1);
+      var index = parseInt(auxIndex);
+      var result = "";
+      if (id.includes("p")) result = this.plates[index - 1];
+      else result = this.cakes[index - 1];
+      return result;
+    },
     goHome() {
       return;
       // this.mainScreen = true;
@@ -225,8 +247,11 @@ export default {
       }, 3000);
     },
     spinTheRoulette() {
-      this.tasks.forEach(() => {
-        //TODO
+      var auxCakes = this.cakes;
+      this.tasks.forEach(task => {
+        var index = Math.floor(Math.random() * auxCakes.length);
+        console.log("CAKE: " + auxCakes[index] + ", TASK: " + task);
+        auxCakes.splice(index, 1);
       });
     },
     taskButton(id) {
@@ -237,7 +262,6 @@ export default {
   }
 };
 </script>
-
 <style scoped>
 @font-face {
   font-family: Roboto;
@@ -258,8 +282,8 @@ body {
   height: 100%;
 }
 
-.roulette{
-  margin-top: 50px
+.roulette {
+  margin-top: 50px;
 }
 
 .mainScreen {
@@ -276,7 +300,7 @@ body {
   justify-content: center;
 }
 
-.menuScreen{
+.menuScreen {
   position: fixed;
   margin: 0;
   top: 0;
@@ -345,8 +369,8 @@ h5 {
   margin-left: 18%;
 }
 
-.titleAndRoulette{
-  margin-top: 10%
+.titleAndRoulette {
+  margin-top: 10%;
 }
 
 .container {
