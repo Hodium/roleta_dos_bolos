@@ -19,6 +19,41 @@
     <div v-show="pickingScreen" class="otherScreen">
       <img src="./assets/logoTop.svg" class="otherScreenTop" @click="goHome" />
       <img src="./assets/logo.svg" class="otherScreenTopLogo" @click="goHome" />
+      <h3>ESCOLHE OS PRATOS:</h3>
+      <div class="alignCenterVertical">
+        <Button buttonId="p1" name="CACHORROS" :regular="true" @buttonPressed="buttonPressed"></Button>
+        <Button
+          buttonId="p2"
+          name="ESPARGUETE À BOLONHESA"
+          :regular="true"
+          @buttonPressed="buttonPressed"
+        ></Button>
+        <Button
+          buttonId="p3"
+          name="ESPARUETE À CARBONARA"
+          :regular="true"
+          @buttonPressed="buttonPressed"
+        ></Button>
+        <Button buttonId="p4" name="HAMBÚRGUER" :regular="true" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="p5" name="MASSA COM ATUM" :regular="true" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="p6" name="FRANGO ASSADO" :regular="true" @buttonPressed="buttonPressed"></Button>
+        <Button
+          buttonId="p7"
+          name="MASSA COM NATAS E SALSICHAS"
+          :regular="true"
+          @buttonPressed="buttonPressed"
+        ></Button>
+        <Button buttonId="p8" name="WRAPS" :regular="true" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="p9" name="LASANHA" :regular="true" @buttonPressed="buttonPressed"></Button>
+        <Button
+          buttonId="p10"
+          name="BIFINHOS COM NATAS"
+          :regular="true"
+          @buttonPressed="buttonPressed"
+        ></Button>
+        <Button buttonId="p11" name="PICA-PAU" :regular="true" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="p12" name="FRANGO À BRAZ" :regular="true" @buttonPressed="buttonPressed"></Button>
+      </div>
       <h3>ESCOLHE AS TAREFAS:</h3>
       <div class="alignCenterVertical">
         <Button buttonId="t1" name="IR ÀS COMPRAS" :regular="true" @buttonPressed="buttonPressed"></Button>
@@ -57,19 +92,19 @@
         <Button buttonId="c6" name="RAFAELA ROSA" :regular="true" @buttonPressed="buttonPressed"></Button>
         <Button
           buttonId="c7"
-          name="SOFIA COTRIM SANTOS"
+          name="SOFIA COTRIM"
           :regular="true"
           @buttonPressed="buttonPressed"
         ></Button>
         <Button
           buttonId="c8"
-          name="JOSÉ MIGUEL POMBO"
+          name="JOSÉ POMBO"
           :regular="true"
           @buttonPressed="buttonPressed"
         ></Button>
         <Button
           buttonId="c9"
-          name="RUI COTRIM SANTOS"
+          name="RUI COTRIM"
           :regular="true"
           @buttonPressed="buttonPressed"
         ></Button>
@@ -126,7 +161,7 @@
         <label>Todos os direitos reservados @ Carmen Martins & Pedro Oliveira . 2020</label>
       </div>
     </div>
-    <div v-show="resultsScreen" class="otherScreen">
+    <div v-show="resultsScreen" class="otherScreen" :key="resultsComponentKey">
       <img src="./assets/logoTop.svg" class="otherScreenTop" @click="goHome" />
       <img src="./assets/logo.svg" class="otherScreenTopLogo" @click="goHome" />
       <Job type="plate" class="firstResult" :winner="getResult('plate')" />
@@ -163,6 +198,7 @@ export default {
   },
   data() {
     return {
+      adminMode: true,
       mainScreen: true,
       menuScreen: false,
       pickingScreen: false,
@@ -170,21 +206,9 @@ export default {
       resultsScreen: false,
       cakes: [],
       tasks: [],
-      resultList: [],
-      plates: [
-        "CACHORROS",
-        "ESPARGUETE À BOLONHESA",
-        "ESPARUETE À CARBONARA",
-        "HAMBURGUER",
-        "MASSA COM ATUM",
-        "FRANGO ASSADO",
-        "MASSA COM NATAS E SALSICHAS",
-        "WRAPS",
-        "LASANHA",
-        "BIFINHOS COM NATAS",
-        "PICA-PAU",
-        "FRANGO À BRAZ"
-      ]
+      plates: [],
+      resultList: {},
+      resultsComponentKey: 0
     };
   },
   methods: {
@@ -192,17 +216,35 @@ export default {
       this.mainScreen = false;
       this.menuScreen = true;
     },
-    buttonPressed(id) {
-      if (id.includes("c")) this.cakeButton(id);
+    buttonPressed(id, name) {
+      if (id.includes("c")) this.cakeButton(name);
       else if (id.includes("t")) this.taskButton(id);
+      else if (id.includes("p")) this.plateButton(name);
       else if (id.includes("m")) this.menuButton(id);
       else this.rouletteButton();
+    },
+    cakeButton(name) {
+      var index = this.cakes.indexOf(name);
+      if (index != -1) this.cakes.splice(name, 1);
+      else this.cakes.push(name);
+    },
+    getResult(id) {
+      if (results.plate == undefined) return this.resultList[id];
+      else return results[id];
+    },
+    goHome() {
+      this.mainScreen = true;
+      this.menuScreen = false;
+      this.pickingScreen = false;
+      this.waitingScreen = false;
+      this.resultsScreen = false;
     },
     menuButton(id) {
       this.menuScreen = false;
       switch (id) {
         case "m1":
-          this.pickingScreen = true;
+          if (this.adminMode) this.pickingScreen = true;
+          else this.rouletteButton();
           break;
         case "m2":
         case "m3":
@@ -212,26 +254,10 @@ export default {
           break;
       }
     },
-    cakeButton(id) {
-      var index = this.cakes.indexOf(id);
-      if (index != -1) this.cakes.splice(id, 1);
-      else this.cakes.push(id);
-    },
-    getResult(id) {
-      var res = results[id];
-      var auxIndex = res.substring(1);
-      var index = parseInt(auxIndex);
-      var result = "";
-      if (id.includes("p")) result = this.plates[index - 1];
-      else result = this.cakes[index - 1];
-      return result;
-    },
-    goHome() {
-      return;
-      // this.mainScreen = true;
-      // this.pickingScreen = false;
-      // this.waitingScreen = false;
-      // this.resultsScreen = false;
+    plateButton(name) {
+      var index = this.plates.indexOf(name);
+      if (index != -1) this.plates.splice(name, 1);
+      else this.plates.push(name);
     },
     resultButton() {
       this.waitingScreen = false;
@@ -240,19 +266,30 @@ export default {
     rouletteButton() {
       this.pickingScreen = false;
       this.waitingScreen = true;
-      this.spinTheRoulette();
+      if (this.adminMode) this.spinTheRoulette();
       var that = this;
       setTimeout(function() {
         that.resultButton();
+        this.resultsComponentKey++;
       }, 3000);
     },
     spinTheRoulette() {
-      var auxCakes = this.cakes;
+      var auxCakes = [...this.cakes];
+      var auxPlateIndex = Math.floor(Math.random() * this.plates.length);
+      this.resultList["plate"] = this.plates[auxPlateIndex];
       this.tasks.forEach(task => {
         var index = Math.floor(Math.random() * auxCakes.length);
-        console.log("CAKE: " + auxCakes[index] + ", TASK: " + task);
+        this.resultList[task] = auxCakes[index];
         auxCakes.splice(index, 1);
       });
+      var auxLuckyCake = "";
+      auxCakes.forEach(cake => {
+        auxLuckyCake += cake + "\r\n";
+      });
+      auxLuckyCake = auxLuckyCake.substring(0, auxLuckyCake.length - 1);
+      this.resultList["t9"] = auxLuckyCake;
+      // console.log("RESULTS", results);
+      // console.log("ROLETA: ", JSON.stringify(this.resultList));
     },
     taskButton(id) {
       var index = this.tasks.indexOf(id);

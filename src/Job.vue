@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <img class="base" src="./assets/btn5.svg" />
+    <img v-show="type != 'lucky'" class="base" src="./assets/jobButton.svg" />
+    <img v-show="type == 'lucky'" class="base" src="./assets/jobButtonLarge.svg" />
+
     <img v-if="type == 'plate'" class="top0" src="./assets/plate.svg" />
     <img v-if="type == 'shop'" class="top1" src="./assets/shop.svg" />
     <img v-if="type == 'meals'" class="top2" src="./assets/meals.svg" />
@@ -11,11 +13,14 @@
     <img v-if="type == 'dry'" class="top7" src="./assets/dry.svg" />
     <img v-if="type == 'trash'" class="top8" src="./assets/trash.svg" />
     <img v-if="type == 'lucky'" class="top9" src="./assets/lucky.svg" />
-    <div class="centered">{{getTask(type)}}</div>
-    <div class="centeredMiddle">
+
+    <div :class="getCenteredClass()">{{getTask(type)}}</div>
+    <div :class="getCenteredMiddleClass()">
       <hr />
     </div>
-    <div class="centeredBottom">{{winner}}</div>
+    <div :class="getCenteredBottomClass()">
+      <label>{{winner}}</label>
+    </div>
   </div>
 </template>
 
@@ -27,6 +32,18 @@ export default {
     winner: String
   },
   methods: {
+    getCenteredBottomClass() {
+      if (this.type == "lucky") return "centeredBottomLucky";
+      else return "centeredBottom";
+    },
+    getCenteredClass() {
+      if (this.type == "lucky") return "centeredLucky";
+      else return "centered";
+    },
+    getCenteredMiddleClass() {
+      if (this.type == "lucky") return "centeredMiddleLucky";
+      else return "centeredMiddle";
+    },
     getTask(type) {
       switch (type) {
         case "plate":
@@ -97,9 +114,27 @@ body {
   width: fit-content;
 }
 
+.centeredLucky {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 50px;
+  font-size: 15px;
+  width: fit-content;
+}
+
 .centeredMiddle {
   position: absolute;
   top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 70px;
+}
+
+.centeredMiddleLucky {
+  position: absolute;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   margin-top: 70px;
@@ -117,10 +152,19 @@ hr {
   transform: translate(-50%, -50%);
   margin-top: 110px;
   width: fit-content;
-  font-size: 20px;
+  font-size: 19px;
 }
 
-.top0{
+.centeredBottomLucky {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 110px;
+  font-size: 19px;
+}
+
+.top0 {
   position: absolute;
   transform: translate(-135%, 20%);
 }

@@ -30,7 +30,7 @@ export default {
   methods: {
     buttonPressed() {
       this.pressed = !this.pressed;
-      this.$emit("buttonPressed", this.buttonId);
+      this.$emit("buttonPressed", this.buttonId, this.name);
     },
     getContainerClass() {
       if (this.buttonId.indexOf("r") == 0 || this.buttonId.indexOf("m") == 0)
