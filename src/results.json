@@ -1,1 +1,18 @@
-{}
+{
+    "plates": [
+        {
+            "id": 0,
+            "values": [
+                "preencher os pratos todos aqui"
+            ]
+        }
+    ],
+    "cakes": [
+        {
+            "id": 0,
+            "values": [
+                "preencher os bolos todos aqui"
+            ]
+        }
+    ]
+}

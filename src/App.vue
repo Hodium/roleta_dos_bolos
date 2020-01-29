@@ -90,24 +90,9 @@
         <Button buttonId="c4" name="PEDRO SARDINHA" :regular="true" @buttonPressed="buttonPressed"></Button>
         <Button buttonId="c5" name="MIGUEL CASTELA" :regular="true" @buttonPressed="buttonPressed"></Button>
         <Button buttonId="c6" name="RAFAELA ROSA" :regular="true" @buttonPressed="buttonPressed"></Button>
-        <Button
-          buttonId="c7"
-          name="SOFIA COTRIM"
-          :regular="true"
-          @buttonPressed="buttonPressed"
-        ></Button>
-        <Button
-          buttonId="c8"
-          name="JOSÉ POMBO"
-          :regular="true"
-          @buttonPressed="buttonPressed"
-        ></Button>
-        <Button
-          buttonId="c9"
-          name="RUI COTRIM"
-          :regular="true"
-          @buttonPressed="buttonPressed"
-        ></Button>
+        <Button buttonId="c7" name="SOFIA COTRIM" :regular="true" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="c8" name="JOSÉ POMBO" :regular="true" @buttonPressed="buttonPressed"></Button>
+        <Button buttonId="c9" name="RUI COTRIM" :regular="true" @buttonPressed="buttonPressed"></Button>
         <Button
           buttonId="c10"
           name="CATARINA SANTOS"
@@ -228,9 +213,56 @@ export default {
       if (index != -1) this.cakes.splice(name, 1);
       else this.cakes.push(name);
     },
+    getCurrentResultsLists() {
+      var currResults = results;
+      var auxPlatesLists = currResults.plates;
+      var auxCakesLists = currResults.cakes;
+      var finalPlatesLists = [];
+      var finalCakesLists = [];
+
+      //plates
+      if (auxPlatesLists.length == 0) finalPlatesLists = this.plates;
+      else {
+        auxPlatesLists.sort((a, b) => {
+          return parseInt(a.id) > parseInt(b.id);
+        });
+        var readyPlates = false;
+        auxPlatesLists.forEach(list => {
+          if (!readyPlates) {
+            list.values.forEach(listItem => {
+              if (this.plates.indexOf(listItem) >= 0) {
+                finalPlatesLists.push(listItem);
+              }
+            });
+          }
+          if (finalPlatesLists.length != 0) readyPlates = true;
+        });
+      }
+
+      //cakes
+      if (auxCakesLists.length == 0) finalCakesLists.push(this.cakes);
+      else {
+        auxCakesLists.sort((a, b) => {
+          return parseInt(a.id) > parseInt(b.id);
+        });
+        var totalIndex = 0;
+        auxCakesLists.forEach(list => {
+          if (totalIndex != this.cakes.length) {
+            var subList = [];
+            list.values.forEach(listItem => {
+              if (this.cakes.indexOf(listItem) >= 0) {
+                subList.push(listItem);
+                totalIndex++;
+              }
+            });
+            finalCakesLists.push(subList);
+          }
+        });
+      }
+      return { platesList: finalPlatesLists, cakesList: finalCakesLists };
+    },
     getResult(id) {
-      if (results.plate == undefined) return this.resultList[id];
-      else return results[id];
+      return this.resultList[id];
     },
     goHome() {
       this.mainScreen = true;
@@ -274,27 +306,42 @@ export default {
       }, 3000);
     },
     spinTheRoulette() {
-      var auxCakes = [...this.cakes];
-      var auxPlateIndex = Math.floor(Math.random() * this.plates.length);
-      this.resultList["plate"] = this.plates[auxPlateIndex];
-      this.tasks.forEach(task => {
-        var index = Math.floor(Math.random() * auxCakes.length);
-        this.resultList[task] = auxCakes[index];
-        auxCakes.splice(index, 1);
-      });
+      var auxLists = this.getCurrentResultsLists();
+
+      //plates
+      var auxPlateIndex = Math.floor(
+        Math.random() * auxLists.platesList.length
+      );
+      this.resultList["plate"] = auxLists.platesList[auxPlateIndex];
+
+      //cakes
       var auxLuckyCake = "";
-      auxCakes.forEach(cake => {
-        auxLuckyCake += cake + "\r\n";
+      var auxTasks = [...this.tasks];
+      auxLists.cakesList.forEach(cakeList => {
+        cakeList.forEach(cakeItem => {
+          if (auxTasks.length > 0) {
+            var index = Math.floor(Math.random() * auxTasks.length);
+            this.resultList[auxTasks[index]] = cakeItem;
+            auxTasks.splice(index, 1);
+          } else auxLuckyCake += cakeItem + "\r\n";
+        });
       });
       auxLuckyCake = auxLuckyCake.substring(0, auxLuckyCake.length - 1);
       this.resultList["t9"] = auxLuckyCake;
-      // console.log("RESULTS", results);
-      // console.log("ROLETA: ", JSON.stringify(this.resultList));
+
+      var finalResult = this.updateResults()
+      prompt("SALVA ESTA RESPOSTA!", finalResult)
     },
     taskButton(id) {
       var index = this.tasks.indexOf(id);
       if (index != -1) this.tasks.splice(id, 1);
       else this.tasks.push(id);
+    },
+    updateResults(){
+      //TODO - Update ao documento results
+      console.log("RESULTS:", results);
+      console.log("RESULT LIST:", this.resultList);
+      
     }
   }
 };

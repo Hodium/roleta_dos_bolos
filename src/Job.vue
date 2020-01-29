@@ -185,7 +185,7 @@ hr {
 
 .top5 {
   position: absolute;
-  transform: translate(-185%, 50%);
+  transform: translate(-135%, 20%)
 }
 
 .top8 {
