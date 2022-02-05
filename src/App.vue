@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div v-show="mainScreen" @click="advanceToMenu" class="mainScreen">
-      <img src="./assets/logo.svg" />
+      <img class="mainScreenImage" src="./assets/logo.svg" />
     </div>
     <div v-show="menuScreen" class="menuScreen">
       <div>
@@ -338,10 +338,7 @@ export default {
       else this.tasks.push(id);
     },
     updateResults(){
-      //TODO - Update ao documento results
-      console.log("RESULTS:", results);
-      console.log("RESULT LIST:", this.resultList);
-      
+      //TODO - Update ao documento results      
     }
   }
 };
@@ -382,6 +379,13 @@ body {
   background-size: auto;
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.mainScreenImage{
+width: inherit;
+height: fit-content;
+padding: 1em;
 }
 
 .menuScreen {
